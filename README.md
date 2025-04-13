@@ -65,7 +65,7 @@ This script follows a **source-first** workflow, attempting to gather informatio
 3.  **Select Language:** Choose either "English" or "Chinese (简体)" using the radio buttons.
 4.  **Start Research:** Click the "Start Research" button. The button will disable while processing.
 5.  **Monitor Output:** Watch the text area below for progress updates, logs, potential errors, and the final assembled report draft.
-6.  **Find Files:** Once finished, the script will save two files (`research_data_...json` and `research_report_...txt`) into the configured output directory (default path is hardcoded near the end of the script, currently `D:\Documents\北京银行工作\本组项目任务\deepseek应用研究\Deepresearch_output`).
+6.  **Find Files:** Once finished, the script will save two files (`research_data_...json` and `research_report_...txt`) into the directory specified by the `target_directory` variable in the script (see Configuration section).
 
 ## Configuration (Inside the Script)
 
@@ -79,7 +79,7 @@ You can modify the following constants near the top of the script file:
 * `SEARCH_RESULTS_PER_QUERY`: How many results SerpApi returns per query.
 * `MAX_SEARCH_ATTEMPTS`: Maximum number of SerpApi calls allowed per run.
 * `MAX_QUERY_REFINEMENT_ATTEMPTS`: Maximum number of times the LLM will be asked to refine a failed query.
-* `target_directory` (in the `if __name__ == "__main__":` block): Change the path where output files are saved.
+* `target_directory` (in the `if __name__ == "__main__":` block): Change the path where output files are saved. **Ensure this path exists or the script has permissions to create it.**
 
 ## Limitations & Known Issues
 
@@ -104,4 +104,4 @@ You can modify the following constants near the top of the script file:
 
 (Placeholder - Add your preferred open-source license here, e.g., MIT)
 
-Copyright [Year] [Your Name]Permission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the "Software"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:
+Copyright [Year] [Your Name]Permission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the "Software"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:The above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
