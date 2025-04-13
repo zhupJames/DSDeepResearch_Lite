@@ -35,7 +35,7 @@ This script follows a **source-first** workflow, attempting to gather informatio
 
 ## Setup
 
-1.  **Save the Script:** Download or copy the Python code and save it as a file (e.g., `research_gui.py`).
+1.  **Save the Script:** Download or copy DS_Deepresearch.py and save it as a file.
 2.  **Install Dependencies:** Open your terminal or command prompt and install the `requests` library:
     ```bash
     pip install requests
@@ -58,9 +58,8 @@ This script follows a **source-first** workflow, attempting to gather informatio
 
 1.  **Run the Script:** Open a terminal or command prompt (a *new* one after setting environment variables) navigate to the directory where you saved the file, and run:
     ```bash
-    python research_gui.py
+    python DS_Deepresearch.py
     ```
-    *(Replace `research_gui.py` with your filename if different)*
 2.  **Enter Topic:** Type your research topic into the "Research Topic" field in the GUI window that appears.
 3.  **Select Language:** Choose either "English" or "Chinese (简体)" using the radio buttons.
 4.  **Start Research:** Click the "Start Research" button. The button will disable while processing.
