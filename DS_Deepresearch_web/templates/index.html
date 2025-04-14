@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>DS Deepresearch Web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Using Bootswatch Cosmo theme for a modern look -->
+  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5/dist/cosmo/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 60px;
+      background: #f8f9fa;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .form-section {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 20px 0;
+      text-align: center;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container">
+          <a class="navbar-brand" href="/">DS Deepresearch Web</a>
+      </div>
+  </nav>
+  
+  <div class="container">
+    <div class="form-section">
+      <h1 class="mb-4">DS Deepresearch Web Interface</h1>
+      
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="mt-3">
+          {% for category, msg in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ msg|safe }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% endwith %}
+      
+      <form id="researchForm">
+        <div class="mb-3">
+          <label for="topic" class="form-label">Research Topic:</label>
+          <input type="text" id="topic" name="topic" class="form-control" placeholder="Enter your research topic" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Output Language:</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="language" id="langEn" value="en" checked>
+            <label class="form-check-label" for="langEn">English</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="language" id="langZh" value="zh">
+            <label class="form-check-label" for="langZh">Chinese (简体)</label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Study Mode:</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="study_mode" id="modeTesting" value="testing" checked>
+            <label class="form-check-label" for="modeTesting">Testing (Fast)</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="study_mode" id="modeFull" value="full">
+            <label class="form-check-label" for="modeFull">Full Study</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="target_sources" class="form-label">Target Sources:</label>
+            <input type="number" id="target_sources" name="target_sources" class="form-control" value="40" min="1">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="max_searches" class="form-label">Max Searches:</label>
+            <input type="number" id="max_searches" name="max_searches" class="form-control" value="10" min="1">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="results_per_query" class="form-label">Results per Query:</label>
+            <input type="number" id="results_per_query" name="results_per_query" class="form-control" value="5" min="1">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="max_refinements" class="form-label">Max Query Refinements:</label>
+            <input type="number" id="max_refinements" name="max_refinements" class="form-control" value="3" min="0">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="max_tokens_outline" class="form-label">Max Tokens (Outline):</label>
+            <input type="number" id="max_tokens_outline" name="max_tokens_outline" class="form-control" value="1500" min="100">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="max_tokens_synthesis" class="form-label">Max Tokens (Section):</label>
+            <input type="number" id="max_tokens_synthesis" name="max_tokens_synthesis" class="form-control" value="500" min="50">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="max_tokens_query_gen" class="form-label">Max Tokens (Query Generation):</label>
+            <input type="number" id="max_tokens_query_gen" name="max_tokens_query_gen" class="form-control" value="300" min="50">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="max_tokens_query_refine" class="form-label">Max Tokens (Query Refinement):</label>
+            <input type="number" id="max_tokens_query_refine" name="max_tokens_query_refine" class="form-control" value="100" min="20">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Start Research</button>
+      </form>
+      <div id="statusMessage" class="mt-3"></div>
+    </div>
+  </div>
+  
+  <footer>
+      <div class="container">
+          <p>&copy; 2025 DS Deepresearch Web. All rights reserved.</p>
+      </div>
+  </footer>
+  
+  <!-- Bootstrap Bundle with Popper and jQuery (for AJAX) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#researchForm").submit(function(e){
+        e.preventDefault();
+        $("#statusMessage").html("<div class='alert alert-info'>Research process started. Please wait...</div>");
+        $.ajax({
+          url: "/start_research",
+          type: "POST",
+          data: $(this).serialize(),
+          success: function(response){
+            pollJob(response.job_id);
+          },
+          error: function(xhr){
+            $("#statusMessage").html("<div class='alert alert-danger'>Error starting research process.</div>");
+          }
+        });
+      });
+      
+      function pollJob(job_id) {
+        $.ajax({
+          url: "/job_status/" + job_id,
+          type: "GET",
+          success: function(data){
+            if(data.status === "processing"){
+              $("#statusMessage").html("<div class='alert alert-info'>Processing... Please wait.</div>");
+              setTimeout(function(){ pollJob(job_id); }, 3000);
+            } else if(data.status === "complete"){
+              window.location.href = "/results/" + job_id;
+            } else if(data.status === "error"){
+              $("#statusMessage").html("<div class='alert alert-danger'>Error: " + data.result + "</div>");
+            }
+          },
+          error: function(){
+            $("#statusMessage").html("<div class='alert alert-danger'>Error polling job status.</div>");
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
