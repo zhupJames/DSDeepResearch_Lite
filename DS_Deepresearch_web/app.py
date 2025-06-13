@@ -161,7 +161,10 @@ Based on the research topic "{topic}", generate a list of 5 diverse and optimize
 Output ONLY the list of queries, one query per line.
     """
     llm_generated_queries_str = call_llm_api(query_gen_prompt, lang_code="en", model=target_model_id, max_tokens=max_tokens_query_gen)
-    search_queries = [q.strip() for q in llm_generated_queries_str.splitlines() if q.strip() and len(q.strip()) > 3]
+    search_queries = []
+    if llm_generated_queries_str and not llm_generated_queries_str.startswith("Error:"):
+        search_queries = [q.strip() for q in llm_generated_queries_str.splitlines() if q.strip()]
+        search_queries = [q for q in search_queries if len(q) > 3 and not q.startswith("Here") and not q.startswith("1.")]
     if not search_queries:
         search_queries = [f'"{topic}"', f'"{topic}" review', f'"{topic}" survey']
 
